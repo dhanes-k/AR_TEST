@@ -103,7 +103,7 @@ function showDialog(imageSrc, videoSrc, textContent) {
     imageElement.style.display = "block";
   }
 
-  videoElement.addEventListener('ended', function() {
+  videoElement.addEventListener("ended", function () {
     videoElement.load();
     videoElement.pause();
   });
