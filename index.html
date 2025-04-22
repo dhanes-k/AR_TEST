@@ -177,7 +177,9 @@
     </div>
 
     <div class="back">
-        <img src="./assets/img/back.png" alt="" />
+        <a href="https://ar.rudran.digital/">
+          <img src="./assets/img/back.png" alt="" />
+        </a>
     </div>
 
     <!-- Image Buttons -->
@@ -312,7 +314,7 @@
   </div>
 
     <a-scene
-      mindar-image="imageTargetSrc: ./target/four.mind; filterMinCF: 0.0001; filterBeta: 1; uiScanning: 
+      mindar-image="imageTargetSrc: ./target/seven.mind; filterMinCF: 0.0001; filterBeta: 1; uiScanning: 
     #example-scanning-overlay"
       color-space="sRGB"
       renderer="colorManagement: true, physicallyCorrectLights: true"
@@ -323,28 +325,31 @@
       maxTrack="1"
       gesture-detector
     >
-      <a-assets>
-        <a-assets id="assets">
-          <audio id="mysound2" src="./assets/sounds/tabla.mp3"></audio>
-          <audio id="mysound" src="./assets/sounds/sound.mp3"></audio>
-          <audio id="mysound3" src="./assets/sounds/devam.mp3"></audio>
-          <audio id="sitar" src="./assets/sounds/sit3.mp3"></audio>
-          <a-asset-item
-            id="particles"
-            src="./assets/glb/particle.glb"
-          ></a-asset-item>
-          <a-asset-item
-            id="Sitar_GLB"
-            src="./assets/glb/sitar_new.glb"
-          ></a-asset-item>
-          <!-- Load butterfly images dynamically via JS -->
-        </a-assets>
-
-        <a-mixin
-          id="animated"
-          animation="property: position; to: 0 0 0.2; dur: 600; easing: easeInOutQuad; loop: true; dir: alternate"
-        ></a-mixin>
+    <a-assets>
+      <a-assets id="assets">
+        <audio id="mysound2" src="./assets/sounds/tabla.mp3"></audio>
+        <audio id="mysound" src="./assets/sounds/sound.mp3"></audio>
+        <audio id="mysound3" src="./assets/sounds/devam.mp3"></audio>
+        <audio id="sitar" src="./assets/sounds/sit3.mp3"></audio>
+        <audio id="agra" src="./assets/sounds/bgm.mp3"></audio>
+        <audio id="arch" src="./assets/sounds/svsc.mp3"></audio>
+        <audio id="san" src="./assets/sounds/san.mp3"></audio>
+        <a-asset-item
+          id="particles"
+          src="./assets/glb/particle.glb"
+        ></a-asset-item>
+        <a-asset-item
+          id="Sitar_GLB"
+          src="./assets/glb/sitar_new.glb"
+        ></a-asset-item>
+        <!-- Load butterfly images dynamically via JS -->
       </a-assets>
+
+      <a-mixin
+        id="animated"
+        animation="property: position; to: 0 0 0.2; dur: 600; easing: easeInOutQuad; loop: true; dir: alternate"
+      ></a-mixin>
+    </a-assets>
 
       <a-camera
         position="0 0 0"
@@ -445,6 +450,73 @@
         >
         </a-entity>
       </a-entity>
+
+      <a-entity
+      id="target4"
+      mindar-image-target="targetIndex: 4"
+      play-audio="sound: #agra"
+    >
+      <a-image
+        id="anim4"
+        src=""
+        position="0 0.02 0"
+        scale="1 0.5 0.5"
+        width="1"
+        height="1"
+      ></a-image>
+      <a-sound
+        id="ani2"
+        src="#mysound3"
+        autoplay="false"
+        position="0 0 0"
+        volume="1"
+      ></a-sound>
+    </a-entity>
+
+    <a-entity
+      id="target5"
+      mindar-image-target="targetIndex: 5"
+      play-audio="sound: #arch"
+    >
+      <a-image
+        id="anim5"
+        src=""
+        position="0 0 0"
+        scale="1 1.05 1"
+        width="1"
+        height="1"
+      ></a-image>
+      <a-sound
+        id="ani2"
+        src="#mysound3"
+        autoplay="false"
+        position="0 0 0"
+        volume="1"
+      ></a-sound>
+    </a-entity>
+    
+    <a-entity
+      id="target6"
+      mindar-image-target="targetIndex: 6"
+      play-audio="sound: #san"
+    >
+      <a-image
+        id="anim6"
+        src=""
+        position="0 0 0"
+        scale="1 .48 1"
+        width="1"
+        height="1"
+      ></a-image>
+      <a-sound
+        id="ani2"
+        src="#mysound3"
+        autoplay="false"
+        position="0 0 0"
+        volume="1"
+      ></a-sound>
+    </a-entity>
+
     </a-scene>
 
     <script src="./ar.js"></script>
@@ -457,6 +529,9 @@
           { char: `Thabela and dance `, count: 7 },
           { char: `sitar `, count: 3 },
           { char: `ms `, count: 3 },
+          { char: `ag `, count: 3 },
+          { char: `arch `, count: 3 },
+          { char: `san `, count: 7 },
         ];
 
         const frameSources = {};
@@ -481,6 +556,9 @@
           },
           { targetId: "target1", imageId: "anim1", character: "sitar " },
           { targetId: "target2", imageId: "anim2", character: "ms " },
+          { targetId: "target4", imageId: "anim4", character: "ag " },
+          { targetId: "target5", imageId: "anim5", character: "arch " },
+          { targetId: "target6", imageId: "anim6", character: "san " },
         ];
 
         targets.forEach(({ targetId, imageId, character }) => {
