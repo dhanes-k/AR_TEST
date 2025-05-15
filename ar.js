@@ -370,7 +370,7 @@ const assets = document.getElementById("assets");
 const characters = [
   { char: `Thabela and dance `, count: 7 },
   { char: `sitar `, count: 3 },
-  { char: `ms `, count: 3 },
+  { char: `ms `, count: 5 },
   { char: `ag `, count: 3 },
   { char: `arch `, count: 3 },
   { char: `san `, count: 7 },
@@ -434,11 +434,11 @@ targets.forEach(({ targetId, imageId, character }) => {
 
 function showSubtitle(currentTime) {
   const subtitleContainer = document.getElementById("subtitle-container");
-  console.log("Subtitles loaded:", subtitles);
-  const line = subtitles.find(
+
+  const line = subtitles[currentTargetImg.target.getAttribute('id').slice(-1)].find(
     (s) => currentTime >= s.start && currentTime < s.end
   );
-  console.log("currentTargetImg", currentTargetImg.target.getAttribute('id').slice(-1));
+
   subtitleContainer.style.display = line ? "block" : "none";
   subtitleContainer.innerText = line ? line.text : "";
 }
