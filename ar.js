@@ -8,6 +8,7 @@ const scoreResult = document.querySelector(".score");
 const applause = new Audio("./assets/sounds/applause.wav");
 let currentQuestion = 0;
 let score = 0;
+let isDialogOpen = false;
 let questions = [
   {
     question: "Who is known as the 'Father of the Sitar'?",
@@ -76,7 +77,21 @@ const count = 200,
   defaultsOne = {
     origin: { y: 0.7 },
   };
+
+let testSong;
+let subtitleInterval;
+let subtitles = [];
+let currentTargetImg;
+
 function showDialog(imageSrc, videoSrc, textContent) {
+  isDialogOpen = true;
+
+  if (testSong) {
+    testSong.pause();
+    testSong.currentTime = 0;
+    clearInterval(subtitleInterval);
+  }
+
   glassModal.style.display = "none";
   let imageElement = document.getElementById("dialogImage");
   let videoElement = document.getElementById("dialogVideo");
@@ -111,6 +126,31 @@ function showDialog(imageSrc, videoSrc, textContent) {
   document.getElementById("dialogText").innerText = textContent;
   document.getElementById("dialogBox").style.display = "block";
 }
+
+const closeModal = (event) => {
+  isDialogOpen = false;
+  if (testSong) {
+    testSong.play();
+    subtitleInterval = setInterval(() => {
+      showSubtitle(testSong.currentTime);
+    }, 300);
+  }
+  let videoElement = document.getElementById("dialogVideo");
+  switch (event) {
+    case "quest":
+      glassModal.style.display = "none";
+
+      break;
+    case "video":
+      dialogbox.style.display = "none";
+      videoElement.currentTime = 0;
+      videoElement.pause();
+      break;
+
+    default:
+      break;
+  }
+};
 
 function closeDialog() {
   document.getElementById("dialogBox").style.display = "none";
@@ -261,24 +301,6 @@ const finished = () => {
   closeModal("quest");
 };
 
-const closeModal = (event) => {
-  let videoElement = document.getElementById("dialogVideo");
-  switch (event) {
-    case "quest":
-      glassModal.style.display = "none";
-
-      break;
-    case "video":
-      dialogbox.style.display = "none";
-      videoElement.currentTime = 0;
-      videoElement.pause();
-      break;
-
-    default:
-      break;
-  }
-};
-
 const resetQuiz = () => {
   // Reset the current question index and score
   currentQuestion = 0;
@@ -341,3 +363,128 @@ const fireWorksAnimation = () => {
     );
   }, 250);
 };
+
+// document.addEventListener("DOMContentLoaded", () => {
+const assets = document.getElementById("assets");
+
+const characters = [
+  { char: `Thabela and dance `, count: 7 },
+  { char: `sitar `, count: 3 },
+  { char: `ms `, count: 3 },
+  { char: `ag `, count: 3 },
+  { char: `arch `, count: 3 },
+  { char: `san `, count: 7 },
+];
+
+const frameSources = {};
+
+characters.forEach(({ char, count }) => {
+  frameSources[char] = [];
+  for (let i = 0; i < count; i++) {
+    const img = document.createElement("img");
+    if (!img.src) {
+      img.src = `./animate/${char}${i + 1}.png`;
+    }
+    const imgId = `${char.trim().replace(/\s+/g, "-")}_${i + 1}`;
+    img.setAttribute("id", imgId);
+    img.setAttribute("src", `./animate/${char}${i + 1}.png`);
+    assets.appendChild(img);
+    frameSources[char].push(`#${imgId}`);
+  }
+});
+
+const targets = [
+  {
+    targetId: "target0",
+    imageId: "anim0",
+    character: "Thabela and dance ",
+  },
+  { targetId: "target1", imageId: "anim1", character: "sitar " },
+  { targetId: "target2", imageId: "anim2", character: "ms " },
+  { targetId: "target4", imageId: "anim4", character: "ag " },
+  { targetId: "target5", imageId: "anim5", character: "arch " },
+  { targetId: "target6", imageId: "anim6", character: "san " },
+];
+
+targets.forEach(({ targetId, imageId, character }) => {
+  const target = document.getElementById(targetId);
+  const plane = document.getElementById(imageId);
+  const frames = frameSources[character];
+  let frameIndex = 0;
+  let animationInterval;
+  let lostTimeout;
+
+  target.addEventListener("targetFound", () => {
+    console.log("Target Found!");
+    clearTimeout(lostTimeout);
+    frameIndex = 0;
+    animationInterval = setInterval(() => {
+      plane.setAttribute("src", frames[frameIndex]);
+      frameIndex = (frameIndex + 1) % frames.length;
+    }, 200);
+  });
+
+  target.addEventListener("targetLost", () => {
+    console.log("Cleaning up animation due to lost target.");
+    clearInterval(animationInterval);
+    // plane.setAttribute("src", "");
+  });
+});
+// });
+
+function showSubtitle(currentTime) {
+  const subtitleContainer = document.getElementById("subtitle-container");
+  console.log("Subtitles loaded:", subtitles);
+  const line = subtitles.find(
+    (s) => currentTime >= s.start && currentTime < s.end
+  );
+  console.log("currentTargetImg", currentTargetImg.target.getAttribute('id').slice(-1));
+  subtitleContainer.style.display = line ? "block" : "none";
+  subtitleContainer.innerText = line ? line.text : "";
+}
+
+AFRAME.registerComponent("play-audio", {
+  schema: {
+    sound: { type: "selector" },
+    subtitles: { type: "asset" },
+  },
+
+  init: function () {
+    const entity = this.el;
+    const sound = this.data.sound;
+    const subtitleContainer = document.getElementById("subtitle-container");
+
+    // Load subtitles (assuming it's a JSON file)
+    fetch(this.data.subtitles)
+      .then((res) => res.json())
+      .then((data) => {
+        subtitles.push(data);
+      })
+      .catch((err) => {
+        console.error("Subtitle loading error:", err);
+      });
+
+
+    entity.addEventListener("targetFound", (event) => {
+      currentTargetImg = event
+      console.log("Target Found! Playing audio...");
+      if (!isDialogOpen) {
+        sound.play();
+        testSong = sound;
+        subtitleInterval = setInterval(() => {
+          showSubtitle(sound.currentTime);
+        }, 300);
+      }
+    });
+
+    entity.addEventListener("targetLost", () => {
+      console.log("Target Lost! Stopping audio...");
+      testSong = null;
+      sound.pause();
+      sound.currentTime = 0;
+      clearInterval(subtitleInterval);
+      subtitleContainer.innerText = "";
+      subtitleContainer.style.display = "none";
+    });
+  },
+});
