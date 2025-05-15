@@ -33,13 +33,14 @@
 
   <style>
     #subtitle-container {
-      width: 90%;
+      max-width: 90%;
       position: absolute;
       bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 999;
       display: flex;
+      padding: 10px;  
       gap: 20px;
       background-color: #000000;
     }
@@ -47,16 +48,16 @@
     /* Button Styles */
     .scan-buttons {
       position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
+      top: 10px;
+      right: 10px;
+      /* transform: translateX(-50%); */
       z-index: 999;
       display: flex;
       gap: 20px;
     }
     .scan-buttons img {
-      width: 100px;
-      height: 100px;
+      width: 60px;
+      height: 60px;
       cursor: pointer;
       transition: transform 0.2s;
     }
@@ -297,7 +298,7 @@
       </div>
     </div>
 
-    <div id="subtitle-container"></div>
+    <div id="subtitle-container" style="display: none;"></div>
 
 
     <div id="dialogBox" class="dialog-box">
@@ -352,14 +353,13 @@
     >
       <a-assets>
         <a-assets id="assets">
+          <audio id="sitarGlbMP3" src="./assets/sounds/sitarGlb.mp3"></audio>
+          <audio id="archMP3" src="./assets/sounds/arch.mp3"></audio>
+          <audio id="agraMP3" src="./assets/sounds/agra.mp3"></audio>
           <audio id="sitarMP3" src="./assets/sounds/sitar.mp3"></audio>
-          <audio id="mysound2" src="./assets/sounds/tabla.mp3"></audio>
-          <audio id="mysound" src="./assets/sounds/sound.mp3"></audio>
-          <audio id="mysound3" src="./assets/sounds/devam.mp3"></audio>
-          <audio id="sitar" src="./assets/sounds/sit3.mp3"></audio>
-          <audio id="agra" src="./assets/sounds/bgm.mp3"></audio>
-          <audio id="arch" src="./assets/sounds/svsc.mp3"></audio>
-          <audio id="san" src="./assets/sounds/san.mp3"></audio>
+          <audio id="ms" src="./assets/sounds/ms.mp3"></audio>
+          <audio id="thabela_dance" src="./assets/sounds/thabela_dance.mp3"></audio>
+          <audio id="aToA" src="./assets/sounds/aToA.mp3"></audio>
           <a-asset-item
             id="particles"
             src="./assets/glb/particle.glb"
@@ -388,7 +388,7 @@
       <a-entity
         id="target0"
         mindar-image-target="targetIndex: 0"
-        play-audio="sound: #mysound2"
+        play-audio="sound: #thabela_dance; subtitles: assets/subtitles5.json"
       >
         <a-image
           id="anim0"
@@ -400,7 +400,7 @@
         ></a-image>
         <a-sound
           id="sound0"
-          src="#mysound2"
+          src="#thabela_dance"
           autoplay="false"
           position="0 0 0"
           volume="1"
@@ -410,7 +410,7 @@
       <a-entity
         id="target1"
         mindar-image-target="targetIndex: 1"
-        play-audio="sound: #mysound"
+        play-audio="sound: #sitarMP3; subtitles: assets/subtitles3.json"
       >
         <a-image
           id="anim1"
@@ -422,7 +422,7 @@
         ></a-image>
         <a-sound
           id="ani1"
-          src="#mysound"
+          src="#sitarMP3"
           autoplay="false"
           position="0 0 0"
           volume="1"
@@ -432,7 +432,7 @@
       <a-entity
         id="target2"
         mindar-image-target="targetIndex: 2"
-        play-audio="sound: #mysound3; subtitles: assets/subtitles1.json"
+        play-audio="sound: #ms; subtitles: assets/subtitles4.json"
       >
         <a-image
           id="anim2"
@@ -444,7 +444,7 @@
         ></a-image>
         <a-sound
           id="ani2"
-          src="#mysound3"
+          src="#ms"
           autoplay="false"
           position="0 0 0"
           volume="1"
@@ -454,7 +454,7 @@
       <a-entity
         id="target2"
         mindar-image-target="targetIndex: 3;"
-        play-audio="sound: #sitar; sound: #sitarMP3; subtitles: assets/subtitles2.json"
+        play-audio="sound: #sitarGlbMP3; subtitles: assets/subtitles.json"
       >
         <a-entity
           id="model1-entity"
@@ -478,7 +478,7 @@
         </a-entity>
         <a-sound
           id="ani2"
-          src="#sitarMP3"
+          src="#sitarGlbMP3"
           autoplay="false"
           position="0 0 0"
           volume="1"
@@ -488,7 +488,7 @@
       <a-entity
         id="target4"
         mindar-image-target="targetIndex: 4"
-        play-audio="sound: #agra"
+        play-audio="sound: #agraMP3; subtitles: assets/subtitles2.json"
       >
         <a-image
           id="anim4"
@@ -500,7 +500,7 @@
         ></a-image>
         <a-sound
           id="ani2"
-          src="#mysound3"
+          src="#agraMP3"
           autoplay="false"
           position="0 0 0"
           volume="1"
@@ -510,7 +510,7 @@
       <a-entity
         id="target5"
         mindar-image-target="targetIndex: 5"
-        play-audio="sound: #arch"
+        play-audio="sound: #archMP3; subtitles: assets/subtitles1.json"
       >
         <a-image
           id="anim5"
@@ -522,7 +522,7 @@
         ></a-image>
         <a-sound
           id="ani2"
-          src="#mysound3"
+          src="#archMP3"
           autoplay="false"
           position="0 0 0"
           volume="1"
@@ -532,7 +532,7 @@
       <a-entity
         id="target6"
         mindar-image-target="targetIndex: 6"
-        play-audio="sound: #san"
+        play-audio="sound: #aToA; subtitles: assets/subtitles6.json"
       >
         <a-image
           id="anim6"
@@ -544,7 +544,7 @@
         ></a-image>
         <a-sound
           id="ani2"
-          src="#mysound3"
+          src="#aToA"
           autoplay="false"
           position="0 0 0"
           volume="1"
@@ -556,123 +556,123 @@
     <script src="./ar.js"></script>
 
     <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const assets = document.getElementById("assets");
+      // document.addEventListener("DOMContentLoaded", () => {
+      //   const assets = document.getElementById("assets");
 
-        const characters = [
-          { char: `Thabela and dance `, count: 7 },
-          { char: `sitar `, count: 3 },
-          { char: `ms `, count: 3 },
-          { char: `ag `, count: 3 },
-          { char: `arch `, count: 3 },
-          { char: `san `, count: 7 },
-        ];
+      //   const characters = [
+      //     { char: `Thabela and dance `, count: 7 },
+      //     { char: `sitar `, count: 3 },
+      //     { char: `ms `, count: 3 },
+      //     { char: `ag `, count: 3 },
+      //     { char: `arch `, count: 3 },
+      //     { char: `san `, count: 7 },
+      //   ];
 
-        const frameSources = {};
+      //   const frameSources = {};
 
-        characters.forEach(({ char, count }) => {
-          frameSources[char] = [];
-          for (let i = 0; i < count; i++) {
-            const img = document.createElement("img");
-            if (!img.src) {
-              img.src = `./animate/${char}${i + 1}.png`;
-            }
-            const imgId = `${char.trim().replace(/\s+/g, "-")}_${i + 1}`;
-            img.setAttribute("id", imgId);
-            img.setAttribute("src", `./animate/${char}${i + 1}.png`);
-            assets.appendChild(img);
-            frameSources[char].push(`#${imgId}`);
-          }
-        });
+      //   characters.forEach(({ char, count }) => {
+      //     frameSources[char] = [];
+      //     for (let i = 0; i < count; i++) {
+      //       const img = document.createElement("img");
+      //       if (!img.src) {
+      //         img.src = `./animate/${char}${i + 1}.png`;
+      //       }
+      //       const imgId = `${char.trim().replace(/\s+/g, "-")}_${i + 1}`;
+      //       img.setAttribute("id", imgId);
+      //       img.setAttribute("src", `./animate/${char}${i + 1}.png`);
+      //       assets.appendChild(img);
+      //       frameSources[char].push(`#${imgId}`);
+      //     }
+      //   });
 
-        const targets = [
-          {
-            targetId: "target0",
-            imageId: "anim0",
-            character: "Thabela and dance ",
-          },
-          { targetId: "target1", imageId: "anim1", character: "sitar " },
-          { targetId: "target2", imageId: "anim2", character: "ms " },
-          { targetId: "target4", imageId: "anim4", character: "ag " },
-          { targetId: "target5", imageId: "anim5", character: "arch " },
-          { targetId: "target6", imageId: "anim6", character: "san " },
-        ];
+      //   const targets = [
+      //     {
+      //       targetId: "target0",
+      //       imageId: "anim0",
+      //       character: "Thabela and dance ",
+      //     },
+      //     { targetId: "target1", imageId: "anim1", character: "sitar " },
+      //     { targetId: "target2", imageId: "anim2", character: "ms " },
+      //     { targetId: "target4", imageId: "anim4", character: "ag " },
+      //     { targetId: "target5", imageId: "anim5", character: "arch " },
+      //     { targetId: "target6", imageId: "anim6", character: "san " },
+      //   ];
 
-        targets.forEach(({ targetId, imageId, character }) => {
-          const target = document.getElementById(targetId);
-          const plane = document.getElementById(imageId);
-          const frames = frameSources[character];
-          let frameIndex = 0;
-          let animationInterval;
-          let lostTimeout;
+      //   targets.forEach(({ targetId, imageId, character }) => {
+      //     const target = document.getElementById(targetId);
+      //     const plane = document.getElementById(imageId);
+      //     const frames = frameSources[character];
+      //     let frameIndex = 0;
+      //     let animationInterval;
+      //     let lostTimeout;
 
-          target.addEventListener("targetFound", () => {
-            console.log("Target Found!");
-            clearTimeout(lostTimeout);
-            frameIndex = 0;
-            animationInterval = setInterval(() => {
-              plane.setAttribute("src", frames[frameIndex]);
-              frameIndex = (frameIndex + 1) % frames.length;
-            }, 200);
-          });
+      //     target.addEventListener("targetFound", () => {
+      //       console.log("Target Found!");
+      //       clearTimeout(lostTimeout);
+      //       frameIndex = 0;
+      //       animationInterval = setInterval(() => {
+      //         plane.setAttribute("src", frames[frameIndex]);
+      //         frameIndex = (frameIndex + 1) % frames.length;
+      //       }, 200);
+      //     });
 
-          target.addEventListener("targetLost", () => {
-            console.log("Cleaning up animation due to lost target.");
-            clearInterval(animationInterval);
-            // plane.setAttribute("src", "");
-          });
-        });
-      });
-      AFRAME.registerComponent("play-audio", {
-        schema: {
-          sound: { type: "selector" },
-          subtitles: { type: "asset" }, // path to JSON file or inline JSON
-        },
+      //     target.addEventListener("targetLost", () => {
+      //       console.log("Cleaning up animation due to lost target.");
+      //       clearInterval(animationInterval);
+      //       // plane.setAttribute("src", "");
+      //     });
+      //   });
+      // });
+      // AFRAME.registerComponent("play-audio", {
+      //   schema: {
+      //     sound: { type: "selector" },
+      //     subtitles: { type: "asset" }, // path to JSON file or inline JSON
+      //   },
 
-        init: function () {
-          const entity = this.el;
-          const sound = this.data.sound;
-          const subtitleContainer =
-            document.getElementById("subtitle-container");
-          let subtitles = [];
-          let subtitleInterval;
+      //   init: function () {
+      //     const entity = this.el;
+      //     const sound = this.data.sound;
+      //     const subtitleContainer =
+      //       document.getElementById("subtitle-container");
+      //     let subtitles = [];
+      //     let subtitleInterval;
 
-          // Load subtitles (assuming it's a JSON file)
-          fetch(this.data.subtitles)
-            .then((res) => res.json())
-            .then((data) => {
-              subtitles = data;
-            })
-            .catch((err) => {
-              console.error("Subtitle loading error:", err);
-            });
+      //     // Load subtitles (assuming it's a JSON file)
+      //     fetch(this.data.subtitles)
+      //       .then((res) => res.json())
+      //       .then((data) => {
+      //         subtitles = data;
+      //       })
+      //       .catch((err) => {
+      //         console.error("Subtitle loading error:", err);
+      //       });
 
-          function showSubtitle(currentTime) {
-            const line = subtitles.find(
-              (s) => currentTime >= s.start && currentTime < s.end
-            );
-            subtitleContainer.innerText = line ? line.text : "";
-          }
+      //     function showSubtitle(currentTime) {
+      //       const line = subtitles.find(
+      //         (s) => currentTime >= s.start && currentTime < s.end
+      //       );
+      //       subtitleContainer.innerText = line ? line.text : "";
+      //     }
 
-          entity.addEventListener("targetFound", () => {
-            console.log("Target Found! Playing audio...");
-            sound.play();
+      //     entity.addEventListener("targetFound", () => {
+      //       console.log("Target Found! Playing audio...");
+      //       sound.play();
 
-            subtitleInterval = setInterval(() => {
-              showSubtitle(sound.currentTime);
-            }, 300);
-          });
+      //       subtitleInterval = setInterval(() => {
+      //         showSubtitle(sound.currentTime);
+      //       }, 300);
+      //     });
 
-          entity.addEventListener("targetLost", () => {
-            console.log("Target Lost! Stopping audio...");
+      //     entity.addEventListener("targetLost", () => {
+      //       console.log("Target Lost! Stopping audio...");
 
-            sound.pause();
-            sound.currentTime = 0;
-            clearInterval(subtitleInterval);
-            subtitleContainer.innerText = "";
-          });
-        },
-      });
+      //       sound.pause();
+      //       sound.currentTime = 0;
+      //       clearInterval(subtitleInterval);
+      //       subtitleContainer.innerText = "";
+      //     });
+      //   },
+      // });
     </script>
 
     <!-- <script>
