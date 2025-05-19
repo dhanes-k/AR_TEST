@@ -488,3 +488,8 @@ AFRAME.registerComponent("play-audio", {
     });
   },
 });
+
+
+
+document.addEventListener("touchstart", unlockAudio, { once: true });
+document.addEventListener("click", unlockAudio, { once: true });
