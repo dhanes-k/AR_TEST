@@ -80,7 +80,7 @@ const count = 200,
 
 let testSong;
 let subtitleInterval;
-let subtitles = [];
+let subtitles = null;
 let currentTargetImg;
 
 function showDialog(imageSrc, videoSrc, textContent) {
@@ -435,7 +435,10 @@ targets.forEach(({ targetId, imageId, character }) => {
 function showSubtitle(currentTime) {
   const subtitleContainer = document.getElementById("subtitle-container");
 
-  const line = subtitles[currentTargetImg.target.getAttribute('id').slice(-1)].find(
+  // const line = subtitles[currentTargetImg.target.getAttribute('id').slice(-1)].find(
+  //   (s) => currentTime >= s.start && currentTime < s.end
+  // );
+  const line = subtitles.find(
     (s) => currentTime >= s.start && currentTime < s.end
   );
 
@@ -455,18 +458,35 @@ AFRAME.registerComponent("play-audio", {
     const subtitleContainer = document.getElementById("subtitle-container");
 
     // Load subtitles (assuming it's a JSON file)
-    fetch(this.data.subtitles)
+    // console.log('dhaneskotti',this.data.subtitles);
+    // fetch(this.data.subtitles)
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     subtitles.push(data);
+    //   })
+    //   .catch((err) => {
+    //     console.error("Subtitle loading error:", err);
+    //   });
+
+    function addSubtitles(sub){
+      fetch(sub)
       .then((res) => res.json())
       .then((data) => {
-        subtitles.push(data);
+        subtitles=data;
       })
       .catch((err) => {
         console.error("Subtitle loading error:", err);
       });
+    }
 
+    function clearSubtitles() {
+      subtitles = null;
+    }
 
     entity.addEventListener("targetFound", (event) => {
-      currentTargetImg = event
+      currentTargetImg = event;
+      addSubtitles(event.target.attributes['sub'].value);
+      console.log("currentTargetImg",event.target.attributes['sub'].value);
       console.log("Target Found! Playing audio...");
       if (!isDialogOpen) {
         sound.play();
@@ -482,6 +502,7 @@ AFRAME.registerComponent("play-audio", {
       testSong = null;
       sound.pause();
       sound.currentTime = 0;
+      clearSubtitles();
       clearInterval(subtitleInterval);
       subtitleContainer.innerText = "";
       subtitleContainer.style.display = "none";
