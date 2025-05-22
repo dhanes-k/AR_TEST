@@ -485,14 +485,14 @@ AFRAME.registerComponent("play-audio", {
     }
 
     function iosEnabled() {
-      if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+      if (!/iPad|iPhone|iPod/.test(navigator.userAgent)) {
         console.log("This is an iOS device.");
         tap.style.display = "flex";
         tap.style.backgroundColor = "#4d4d4dbb";
       }
     }
     function iosDisabled() {
-      if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+      if (!/iPad|iPhone|iPod/.test(navigator.userAgent)) {
         console.log("This is an iOS device.");
         tap.style.backgroundColor = "transparent";
         tap.style.display = "none";
@@ -505,12 +505,14 @@ AFRAME.registerComponent("play-audio", {
       // console.log("currentTargetImg",event.target.attributes['sub'].value);
       console.log("Target Found! Playing audio...");
       if (!isDialogOpen) {
-        sound.play();
         iosEnabled();
-        testSong = sound;
-        subtitleInterval = setInterval(() => {
-          showSubtitle(sound.currentTime);
-        }, 300);
+        if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+          sound.play();
+          testSong = sound;
+          subtitleInterval = setInterval(() => {
+            showSubtitle(sound.currentTime);
+          }, 300);
+        }
       }
     });
 
@@ -529,18 +531,20 @@ AFRAME.registerComponent("play-audio", {
 });
 
 const unlockAudio = () => {
-  if (testSong) {
-    testSong
-      .play()
-      .then(() => {
-        iosDisabled();
-        testSong.pause(); // Immediately pause
-        testSong.currentTime = 0;
-        console.log("Audio unlocked on iOS");
-      })
-      .catch((e) => {
-        console.log("Audio unlock failed:", e);
-      });
+  if (!/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+    if (testSong) {
+      iosDisabled();
+      testSong
+        .play()
+        .then(() => {
+          testSong.pause(); // Immediately pause
+          testSong.currentTime = 0;
+          console.log("Audio unlocked on iOS");
+        })
+        .catch((e) => {
+          console.log("Audio unlock failed:", e);
+        });
+    }
   }
 
   // Remove listeners after one use
