@@ -531,7 +531,7 @@ AFRAME.registerComponent("play-audio", {
 });
 
 const unlockAudio = () => {
-  if (!/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+  // if (!/iPad|iPhone|iPod/.test(navigator.userAgent)) {
     if (testSong) {
       iosDisabled();
       testSong
@@ -544,7 +544,7 @@ const unlockAudio = () => {
         .catch((e) => {
           console.log("Audio unlock failed:", e);
         });
-    }
+    // }
   }
 
   // Remove listeners after one use
