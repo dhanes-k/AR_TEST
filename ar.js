@@ -484,18 +484,29 @@ AFRAME.registerComponent("play-audio", {
       subtitles = null;
     }
 
-    entity.addEventListener("targetFound", (event) => {
+    function iosEnabled() {
       if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
         console.log("This is an iOS device.");
         tap.style.display = "flex";
         tap.style.backgroundColor = "#4d4d4dbb";
       }
+    }
+    function iosDisabled() {
+      if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+        console.log("This is an iOS device.");
+        tap.style.backgroundColor = "transparent";
+        tap.style.display = "none";
+      }
+    }
+
+    entity.addEventListener("targetFound", (event) => {
       currentTargetImg = event;
       addSubtitles(event.target.attributes["sub"].value);
       // console.log("currentTargetImg",event.target.attributes['sub'].value);
       console.log("Target Found! Playing audio...");
       if (!isDialogOpen) {
         sound.play();
+        iosEnabled();
         testSong = sound;
         subtitleInterval = setInterval(() => {
           showSubtitle(sound.currentTime);
@@ -504,11 +515,7 @@ AFRAME.registerComponent("play-audio", {
     });
 
     entity.addEventListener("targetLost", () => {
-      if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-        console.log("This is an iOS device.");
-        tap.style.backgroundColor = "transparent";
-        tap.style.display = "none";
-      }
+      iosDisabled();
       console.log("Target Lost! Stopping audio...");
       testSong = null;
       sound.pause();
@@ -526,6 +533,7 @@ const unlockAudio = () => {
     testSong
       .play()
       .then(() => {
+        iosDisabled();
         testSong.pause(); // Immediately pause
         testSong.currentTime = 0;
         console.log("Audio unlocked on iOS");
