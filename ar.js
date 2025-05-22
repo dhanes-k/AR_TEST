@@ -5,6 +5,7 @@ const finish = document.querySelector(".finish");
 const circleParent = document.querySelector(".circle_parent");
 const question_title = document.querySelector(".question");
 const scoreResult = document.querySelector(".score");
+const tap = document.querySelector(".tapParent");
 const applause = new Audio("./assets/sounds/applause.wav");
 let currentQuestion = 0;
 let score = 0;
@@ -468,15 +469,15 @@ AFRAME.registerComponent("play-audio", {
     //     console.error("Subtitle loading error:", err);
     //   });
 
-    function addSubtitles(sub){
+    function addSubtitles(sub) {
       fetch(sub)
-      .then((res) => res.json())
-      .then((data) => {
-        subtitles=data;
-      })
-      .catch((err) => {
-        console.error("Subtitle loading error:", err);
-      });
+        .then((res) => res.json())
+        .then((data) => {
+          subtitles = data;
+        })
+        .catch((err) => {
+          console.error("Subtitle loading error:", err);
+        });
     }
 
     function clearSubtitles() {
@@ -484,9 +485,14 @@ AFRAME.registerComponent("play-audio", {
     }
 
     entity.addEventListener("targetFound", (event) => {
+      if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+        console.log("This is an iOS device.");
+        tap.style.display = "flex";
+        tap.style.backgroundColor = "#4d4d4dbb";
+      }
       currentTargetImg = event;
-      addSubtitles(event.target.attributes['sub'].value);
-      console.log("currentTargetImg",event.target.attributes['sub'].value);
+      addSubtitles(event.target.attributes["sub"].value);
+      // console.log("currentTargetImg",event.target.attributes['sub'].value);
       console.log("Target Found! Playing audio...");
       if (!isDialogOpen) {
         sound.play();
@@ -498,6 +504,11 @@ AFRAME.registerComponent("play-audio", {
     });
 
     entity.addEventListener("targetLost", () => {
+      if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+        console.log("This is an iOS device.");
+        tap.style.backgroundColor = "transparent";
+        tap.style.display = "none";
+      }
       console.log("Target Lost! Stopping audio...");
       testSong = null;
       sound.pause();
@@ -510,7 +521,24 @@ AFRAME.registerComponent("play-audio", {
   },
 });
 
+const unlockAudio = () => {
+  if (testSong) {
+    testSong
+      .play()
+      .then(() => {
+        testSong.pause(); // Immediately pause
+        testSong.currentTime = 0;
+        console.log("Audio unlocked on iOS");
+      })
+      .catch((e) => {
+        console.log("Audio unlock failed:", e);
+      });
+  }
 
+  // Remove listeners after one use
+  document.removeEventListener("touchstart", unlockAudio);
+  document.removeEventListener("click", unlockAudio);
+};
 
 document.addEventListener("touchstart", unlockAudio, { once: true });
 document.addEventListener("click", unlockAudio, { once: true });
