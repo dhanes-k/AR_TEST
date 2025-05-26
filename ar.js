@@ -505,19 +505,19 @@ AFRAME.registerComponent("play-audio", {
       // console.log("currentTargetImg",event.target.attributes['sub'].value);
       console.log("Target Found! Playing audio...");
       if (!isDialogOpen) {
-        iosEnabled();
-        if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+        // iosEnabled();
+        // if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
           sound.play();
           testSong = sound;
           subtitleInterval = setInterval(() => {
             showSubtitle(sound.currentTime);
           }, 300);
-        }
+        // }
       }
     });
 
     entity.addEventListener("targetLost", () => {
-      iosDisabled();
+      // iosDisabled();
       console.log("Target Lost! Stopping audio...");
       testSong = null;
       sound.pause();
@@ -530,27 +530,27 @@ AFRAME.registerComponent("play-audio", {
   },
 });
 
-const unlockAudio = () => {
-  // if (!/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-    if (testSong) {
-      iosDisabled();
-      testSong
-        .play()
-        .then(() => {
-          testSong.pause(); // Immediately pause
-          testSong.currentTime = 0;
-          console.log("Audio unlocked on iOS");
-        })
-        .catch((e) => {
-          console.log("Audio unlock failed:", e);
-        });
-    // }
-  }
+// const unlockAudio = () => {
+//   // if (!/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+//     if (testSong) {
+//       iosDisabled();
+//       testSong
+//         .play()
+//         .then(() => {
+//           testSong.pause(); // Immediately pause
+//           testSong.currentTime = 0;
+//           console.log("Audio unlocked on iOS");
+//         })
+//         .catch((e) => {
+//           console.log("Audio unlock failed:", e);
+//         });
+//     // }
+//   }
 
-  // Remove listeners after one use
-  document.removeEventListener("touchstart", unlockAudio);
-  document.removeEventListener("click", unlockAudio);
-};
+//   // Remove listeners after one use
+//   document.removeEventListener("touchstart", unlockAudio);
+//   document.removeEventListener("click", unlockAudio);
+// };
 
 document.addEventListener("touchstart", unlockAudio, { once: true });
 document.addEventListener("click", unlockAudio, { once: true });
