@@ -508,13 +508,13 @@ AFRAME.registerComponent("play-audio", {
         if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
           tap.style.display = "flex";
           tap.style.backgroundColor = "#4d4d4dbb";
-        } else {
+        }
           sound.play();
           testSong = sound;
           subtitleInterval = setInterval(() => {
             showSubtitle(sound.currentTime);
           }, 300);
-        }
+        
       }
     });
 
@@ -542,8 +542,6 @@ const unlockAudio = () => {
       .then(() => {
         testSong.pause();
         testSong.currentTime = 0;
-        console.log("Audio unlocked on iOS");
-        alert("Tap to unlock audio on iOS");
       })
       .catch((e) => {
         console.log("Audio unlock failed:", e);
