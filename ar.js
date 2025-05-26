@@ -520,10 +520,6 @@ AFRAME.registerComponent("play-audio", {
 
     entity.addEventListener("targetLost", () => {
       console.log("Target Lost! Stopping audio...");
-      if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-        tap.style.backgroundColor = "transparent";
-        tap.style.display = "none";
-      }
       testSong = null;
       sound.pause();
       sound.currentTime = 0;
@@ -536,14 +532,18 @@ AFRAME.registerComponent("play-audio", {
 });
 
 const unlockAudio = () => {
+  if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+    tap.style.backgroundColor = "transparent";
+    tap.style.display = "none";
+  }
   if (testSong) {
     testSong
-    .play()
-    .then(() => {
-      testSong.pause();
-      testSong.currentTime = 0;
-      console.log("Audio unlocked on iOS");
-      alert("Tap to unlock audio on iOS");
+      .play()
+      .then(() => {
+        testSong.pause();
+        testSong.currentTime = 0;
+        console.log("Audio unlocked on iOS");
+        alert("Tap to unlock audio on iOS");
       })
       .catch((e) => {
         console.log("Audio unlock failed:", e);
