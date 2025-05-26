@@ -485,14 +485,14 @@ AFRAME.registerComponent("play-audio", {
     }
 
     function iosEnabled() {
-      if (!/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+      if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
         console.log("This is an iOS device.");
         tap.style.display = "flex";
         tap.style.backgroundColor = "#4d4d4dbb";
       }
     }
     function iosDisabled() {
-      if (!/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+      if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
         console.log("This is an iOS device.");
         tap.style.backgroundColor = "transparent";
         tap.style.display = "none";
@@ -505,19 +505,20 @@ AFRAME.registerComponent("play-audio", {
       // console.log("currentTargetImg",event.target.attributes['sub'].value);
       console.log("Target Found! Playing audio...");
       if (!isDialogOpen) {
-        // iosEnabled();
-        // if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+        if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+          tap.style.display = "flex";
+          tap.style.backgroundColor = "#4d4d4dbb";
+        }else{
           sound.play();
           testSong = sound;
           subtitleInterval = setInterval(() => {
             showSubtitle(sound.currentTime);
           }, 300);
-        // }
-      }
+        }
+        }
     });
 
     entity.addEventListener("targetLost", () => {
-      // iosDisabled();
       console.log("Target Lost! Stopping audio...");
       testSong = null;
       sound.pause();
@@ -530,27 +531,25 @@ AFRAME.registerComponent("play-audio", {
   },
 });
 
-// const unlockAudio = () => {
-//   // if (!/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-//     if (testSong) {
-//       iosDisabled();
-//       testSong
-//         .play()
-//         .then(() => {
-//           testSong.pause(); // Immediately pause
-//           testSong.currentTime = 0;
-//           console.log("Audio unlocked on iOS");
-//         })
-//         .catch((e) => {
-//           console.log("Audio unlock failed:", e);
-//         });
-//     // }
-//   }
+const unlockAudio = () => {
+  alert("Tap to unlock audio on iOS");
+  if (testSong) {
+    testSong
+      .play()
+      .then(() => {
+        testSong.pause();
+        testSong.currentTime = 0;
+        console.log("Audio unlocked on iOS");
+      })
+      .catch((e) => {
+        console.log("Audio unlock failed:", e);
+      });
+  }
 
-//   // Remove listeners after one use
-//   document.removeEventListener("touchstart", unlockAudio);
-//   document.removeEventListener("click", unlockAudio);
-// };
+  // Remove listeners after one use
+  document.removeEventListener("touchstart", unlockAudio);
+  document.removeEventListener("click", unlockAudio);
+};
 
 document.addEventListener("touchstart", unlockAudio, { once: true });
 document.addEventListener("click", unlockAudio, { once: true });
