@@ -517,7 +517,6 @@ AFRAME.registerComponent("play-audio", {
     });
 
     entity.addEventListener("targetLost", () => {
-      alert("hai lost");
       console.log("Target Lost! Stopping audio...");
       if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
         tap.style.backgroundColor = "transparent";
