@@ -499,16 +499,19 @@ AFRAME.registerComponent("play-audio", {
     //   }
     // }
 
+    isAudiPlaying = false;
+
     entity.addEventListener("targetFound", (event) => {
       currentTargetImg = event;
       addSubtitles(event.target.attributes["sub"].value);
       console.log("Target Found! Playing audio...");
       if (!isDialogOpen) {
-        if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+        sound.play();
+        isAudiPlaying = true;
+        if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !isAudiPlaying) {
           tap.style.display = "flex";
           tap.style.backgroundColor = "#4d4d4dbb";
         }
-        sound.play();
         testSong = sound;
         subtitleInterval = setInterval(() => {
           showSubtitle(sound.currentTime);
@@ -518,13 +521,14 @@ AFRAME.registerComponent("play-audio", {
 
     entity.addEventListener("targetLost", () => {
       console.log("Target Lost! Stopping audio...");
-      if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+      if (/iPad|iPhone|iPod/.test(navigator.userAgent) && isAudiPlaying) {
         tap.style.backgroundColor = "transparent";
         tap.style.display = "none";
       }
       testSong = null;
       sound.pause();
       sound.currentTime = 0;
+      isAudiPlaying = false;
       clearSubtitles();
       clearInterval(subtitleInterval);
       subtitleContainer.innerText = "";
@@ -534,20 +538,20 @@ AFRAME.registerComponent("play-audio", {
 });
 
 const unlockAudio = () => {
-  if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+  if (/iPad|iPhone|iPod/.test(navigator.userAgent) && isAudiPlaying) {
     tap.style.backgroundColor = "transparent";
     tap.style.display = "none";
   }
   if (testSong) {
-    testSong
-      .play()
-      .then(() => {
-        testSong.pause();
-        testSong.currentTime = 0;
-      })
-      .catch((e) => {
-        console.log("Audio unlock failed:", e);
-      });
+    testSong.play();
+    // .then(() => {
+    //   testSong.pause();
+    //   testSong.currentTime = 0;
+    //   isAudiPlaying = false;
+    // })
+    // .catch((e) => {
+    //   console.log("Audio unlock failed:", e);
+    // });
   }
 
   // Remove listeners after one use
@@ -560,9 +564,7 @@ tap.addEventListener("click", () => {
     tap.style.backgroundColor = "transparent";
     tap.style.display = "none";
   }
-  
 });
-
 
 // document.addEventListener("touchstart", unlockAudio, { once: true });
 // document.addEventListener("click", unlockAudio, { once: true });
