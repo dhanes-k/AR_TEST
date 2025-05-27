@@ -433,16 +433,36 @@ targets.forEach(({ targetId, imageId, character }) => {
 });
 // });
 
+// function showSubtitle(currentTime) {
+//   const subtitleContainer = document.getElementById("subtitle-container");
+
+//   // const line = subtitles[currentTargetImg.target.getAttribute('id').slice(-1)].find(
+//   //   (s) => currentTime >= s.start && currentTime < s.end
+//   // );
+//   const line = subtitles.find(
+//     (s) => currentTime >= s.start && currentTime < s.end
+//   );
+
+//   subtitleContainer.style.display = line ? "block" : "none";
+//   subtitleContainer.innerText = line ? line.text : "";
+// }
+
 function showSubtitle(currentTime) {
   const subtitleContainer = document.getElementById("subtitle-container");
 
-  // const line = subtitles[currentTargetImg.target.getAttribute('id').slice(-1)].find(
-  //   (s) => currentTime >= s.start && currentTime < s.end
-  // );
+  // Check if subtitles are loaded and if it's an array
+  if (!subtitles || !Array.isArray(subtitles)) {
+    console.warn("Subtitles are not loaded or not an array.");
+    subtitleContainer.style.display = "none";
+    return; // Exit early if subtitles are not available
+  }
+
+  // Find the subtitle line based on currentTime
   const line = subtitles.find(
     (s) => currentTime >= s.start && currentTime < s.end
   );
 
+  // If a subtitle line is found, display it; otherwise, hide the container
   subtitleContainer.style.display = line ? "block" : "none";
   subtitleContainer.innerText = line ? line.text : "";
 }
@@ -506,24 +526,26 @@ AFRAME.registerComponent("play-audio", {
       addSubtitles(event.target.attributes["sub"].value);
       console.log("Target Found! Playing audio...");
       if (!isDialogOpen) {
-        // sound.play();
+        sound.play();
         sound.addEventListener("playing", () => {
           isAudiPlaying = true;
+          console.log("kotti", sound.currentTime);
+          subtitleInterval = setInterval(() => {
+            showSubtitle(sound.currentTime);
+          }, 300);
         });
         if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !isAudiPlaying) {
           tap.style.display = "flex";
           tap.style.backgroundColor = "#4d4d4dbb";
         }
         testSong = sound;
-        // subtitleInterval = setInterval(() => {
-        //   showSubtitle(sound.currentTime);
-        // }, 300);
       }
     });
 
     entity.addEventListener("targetLost", () => {
       console.log("Target Lost! Stopping audio...");
-      if (/iPad|iPhone|iPod/.test(navigator.userAgent) && isAudiPlaying) {
+      clearInterval(subtitleInterval);
+      if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !isAudiPlaying) {
         tap.style.backgroundColor = "transparent";
         tap.style.display = "none";
       }
@@ -532,7 +554,6 @@ AFRAME.registerComponent("play-audio", {
       sound.currentTime = 0;
       isAudiPlaying = false;
       clearSubtitles();
-      clearInterval(subtitleInterval);
       subtitleContainer.innerText = "";
       subtitleContainer.style.display = "none";
     });
@@ -563,12 +584,17 @@ AFRAME.registerComponent("play-audio", {
 // };
 
 tap.addEventListener("click", () => {
-  if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+  if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !isAudiPlaying) {
     tap.style.backgroundColor = "transparent";
     tap.style.display = "none";
   }
-  if(testSong){
+  if (testSong) {
     testSong.play();
+    console.log("kotti", testSong.currentTime);
+
+    subtitleInterval = setInterval(() => {
+      showSubtitle(testSong.currentTime);
+    }, 300);
   }
 });
 
