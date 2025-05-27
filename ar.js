@@ -534,7 +534,6 @@ AFRAME.registerComponent("play-audio", {
 });
 
 const unlockAudio = () => {
-  alert("hai");
   if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
     tap.style.backgroundColor = "transparent";
     tap.style.display = "none";
@@ -555,6 +554,16 @@ const unlockAudio = () => {
   // document.removeEventListener("touchstart", unlockAudio);
   // document.removeEventListener("click", unlockAudio);
 };
+
+tap.addEventListener("click", () => {
+  alert("Tap to play the audio dhaneskotti");
+  if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+    tap.style.backgroundColor = "transparent";
+    tap.style.display = "none";
+  }
+  
+});
+
 
 // document.addEventListener("touchstart", unlockAudio, { once: true });
 // document.addEventListener("click", unlockAudio, { once: true });
