@@ -556,7 +556,6 @@ const unlockAudio = () => {
 };
 
 tap.addEventListener("click", () => {
-  alert("Tap to play the audio dhaneskotti");
   if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
     tap.style.backgroundColor = "transparent";
     tap.style.display = "none";
