@@ -506,16 +506,18 @@ AFRAME.registerComponent("play-audio", {
       addSubtitles(event.target.attributes["sub"].value);
       console.log("Target Found! Playing audio...");
       if (!isDialogOpen) {
-        sound.play();
-        isAudiPlaying = true;
+        // sound.play();
+        sound.addEventListener("playing", () => {
+          isAudiPlaying = true;
+        });
         if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !isAudiPlaying) {
           tap.style.display = "flex";
           tap.style.backgroundColor = "#4d4d4dbb";
         }
         testSong = sound;
-        subtitleInterval = setInterval(() => {
-          showSubtitle(sound.currentTime);
-        }, 300);
+        // subtitleInterval = setInterval(() => {
+        //   showSubtitle(sound.currentTime);
+        // }, 300);
       }
     });
 
@@ -537,32 +539,36 @@ AFRAME.registerComponent("play-audio", {
   },
 });
 
-const unlockAudio = () => {
-  if (/iPad|iPhone|iPod/.test(navigator.userAgent) && isAudiPlaying) {
-    tap.style.backgroundColor = "transparent";
-    tap.style.display = "none";
-  }
-  if (testSong) {
-    testSong.play();
-    // .then(() => {
-    //   testSong.pause();
-    //   testSong.currentTime = 0;
-    //   isAudiPlaying = false;
-    // })
-    // .catch((e) => {
-    //   console.log("Audio unlock failed:", e);
-    // });
-  }
+// const unlockAudio = () => {
+//   if (/iPad|iPhone|iPod/.test(navigator.userAgent) && isAudiPlaying) {
+//     tap.style.backgroundColor = "transparent";
+//     tap.style.display = "none";
+//   }
+//   console.log("Audio unlocked",testSong);
+//   if (testSong) {
+//     testSong.play();
+//     // .then(() => {
+//     //   testSong.pause();
+//     //   testSong.currentTime = 0;
+//     //   isAudiPlaying = false;
+//     // })
+//     // .catch((e) => {
+//     //   console.log("Audio unlock failed:", e);
+//     // });
+//   }
 
-  // Remove listeners after one use
-  // document.removeEventListener("touchstart", unlockAudio);
-  // document.removeEventListener("click", unlockAudio);
-};
+//   // Remove listeners after one use
+//   document.removeEventListener("touchstart", unlockAudio);
+//   document.removeEventListener("click", unlockAudio);
+// };
 
 tap.addEventListener("click", () => {
   if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
     tap.style.backgroundColor = "transparent";
     tap.style.display = "none";
+  }
+  if(testSong){
+    testSong.play();
   }
 });
 
