@@ -534,7 +534,7 @@ AFRAME.registerComponent("play-audio", {
             showSubtitle(sound.currentTime);
           }, 300);
         });
-        if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !isAudiPlaying) {
+        if (/iPad|iPhone|iPod/.test(navigator.userAgent) && isAudiPlaying) {
           tap.style.display = "flex";
           tap.style.backgroundColor = "#4d4d4dbb";
         }
@@ -545,7 +545,7 @@ AFRAME.registerComponent("play-audio", {
     entity.addEventListener("targetLost", () => {
       console.log("Target Lost! Stopping audio...");
       clearInterval(subtitleInterval);
-      if (/iPad|iPhone|iPod/.test(navigator.userAgent) && isAudiPlaying) {
+      if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !isAudiPlaying) {
         tap.style.backgroundColor = "transparent";
         tap.style.display = "none";
       }
@@ -584,7 +584,7 @@ AFRAME.registerComponent("play-audio", {
 // };
 
 tap.addEventListener("click", () => {
-  if (/iPad|iPhone|iPod/.test(navigator.userAgent) && isAudiPlaying) {
+  if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !isAudiPlaying) {
     tap.style.backgroundColor = "transparent";
     tap.style.display = "none";
   }
