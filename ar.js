@@ -500,6 +500,7 @@ AFRAME.registerComponent("play-audio", {
     // }
 
     entity.addEventListener("targetFound", (event) => {
+      alert("hai found");
       currentTargetImg = event;
       addSubtitles(event.target.attributes["sub"].value);
       console.log("Target Found! Playing audio...");
@@ -508,16 +509,16 @@ AFRAME.registerComponent("play-audio", {
           tap.style.display = "flex";
           tap.style.backgroundColor = "#4d4d4dbb";
         }
-          sound.play();
-          testSong = sound;
-          subtitleInterval = setInterval(() => {
-            showSubtitle(sound.currentTime);
-          }, 300);
-        
+        sound.play();
+        testSong = sound;
+        subtitleInterval = setInterval(() => {
+          showSubtitle(sound.currentTime);
+        }, 300);
       }
     });
 
     entity.addEventListener("targetLost", () => {
+      alert("hai lost");
       console.log("Target Lost! Stopping audio...");
       if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
         tap.style.backgroundColor = "transparent";
@@ -535,7 +536,7 @@ AFRAME.registerComponent("play-audio", {
 });
 
 const unlockAudio = () => {
-  alert('hai')
+  alert("hai");
   if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
     tap.style.backgroundColor = "transparent";
     tap.style.display = "none";
