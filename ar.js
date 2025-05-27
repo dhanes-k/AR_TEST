@@ -484,25 +484,24 @@ AFRAME.registerComponent("play-audio", {
       subtitles = null;
     }
 
-    function iosEnabled() {
-      if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-        console.log("This is an iOS device.");
-        tap.style.display = "flex";
-        tap.style.backgroundColor = "#4d4d4dbb";
-      }
-    }
-    function iosDisabled() {
-      if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-        console.log("This is an iOS device.");
-        tap.style.backgroundColor = "transparent";
-        tap.style.display = "none";
-      }
-    }
+    // function iosEnabled() {
+    //   if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+    //     console.log("This is an iOS device.");
+    //     tap.style.display = "flex";
+    //     tap.style.backgroundColor = "#4d4d4dbb";
+    //   }
+    // }
+    // function iosDisabled() {
+    //   if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+    //     console.log("This is an iOS device.");
+    //     tap.style.backgroundColor = "transparent";
+    //     tap.style.display = "none";
+    //   }
+    // }
 
     entity.addEventListener("targetFound", (event) => {
       currentTargetImg = event;
       addSubtitles(event.target.attributes["sub"].value);
-      // console.log("currentTargetImg",event.target.attributes['sub'].value);
       console.log("Target Found! Playing audio...");
       if (!isDialogOpen) {
         if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
@@ -520,6 +519,10 @@ AFRAME.registerComponent("play-audio", {
 
     entity.addEventListener("targetLost", () => {
       console.log("Target Lost! Stopping audio...");
+      if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+        tap.style.backgroundColor = "transparent";
+        tap.style.display = "none";
+      }
       testSong = null;
       sound.pause();
       sound.currentTime = 0;
@@ -532,6 +535,7 @@ AFRAME.registerComponent("play-audio", {
 });
 
 const unlockAudio = () => {
+  alert('hai')
   if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
     tap.style.backgroundColor = "transparent";
     tap.style.display = "none";
