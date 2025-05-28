@@ -607,3 +607,19 @@ tap.addEventListener("click", () => {
 
 // document.addEventListener("touchstart", unlockAudio, { once: true });
 // document.addEventListener("click", unlockAudio, { once: true });
+
+
+const handleOrientationChange = () => {
+  const orientation = screen.orientation.type;
+  if (orientation.startsWith("portrait")) {
+    alert("Portrait mode");
+    // Perform actions for portrait mode
+  } else if (orientation.startsWith("landscape")) {
+    alert("Landscape mode");
+    // Perform actions for landscape mode
+  }
+};
+
+screen.orientation.addEventListener("change", handleOrientationChange);
+
+handleOrientationChange();
