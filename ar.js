@@ -519,44 +519,31 @@ AFRAME.registerComponent("play-audio", {
     //   }
     // }
 
-    isAudiPlaying = false;
+    // isAudiPlaying = false;
 
     entity.addEventListener("targetFound", (event) => {
       currentTargetImg = event;
       addSubtitles(event.target.attributes["sub"].value);
       console.log("Target Found! Playing audio...");
       if (!isDialogOpen) {
-        sound
-          .play()
-          .then(() => {
-            isAudiPlaying = true;
-
-            if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-              tap.style.backgroundColor = "transparent";
-
-              tap.style.display = "none";
-            }
-
-            subtitleInterval = setInterval(() => {
-              showSubtitle(sound.currentTime);
-            }, 300);
-          })
-          .catch((err) => {
-            console.error("Audio play failed on targetFound:", err);
-          });
-
-        // sound.play();
+        sound.play().then(() => {
+          if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+            console.log("dhanesdhanesdhanes", sound.currentTime);
+            tap.style.display = "none";
+            tap.style.backgroundColor = "transparent";
+          }
+          subtitleInterval = setInterval(() => {
+            showSubtitle(sound.currentTime);
+          }, 300);
+        }).catch((e) => { 
+          if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+            tap.style.display = "flex";
+            tap.style.backgroundColor = "#4d4d4dbb";
+          }
+        });
         // sound.addEventListener("playing", () => {
-        //   isAudiPlaying = true;
-        //   console.log("kotti", sound.currentTime);
-        //   subtitleInterval = setInterval(() => {
-        //     showSubtitle(sound.currentTime);
-        //   }, 300);
+        // isAudiPlaying = true;
         // });
-        // if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !isAudiPlaying) {
-        //   tap.style.display = "flex";
-        //   tap.style.backgroundColor = "#4d4d4dbb";
-        // }
         testSong = sound;
       }
     });
@@ -564,7 +551,7 @@ AFRAME.registerComponent("play-audio", {
     entity.addEventListener("targetLost", () => {
       console.log("Target Lost! Stopping audio...");
       clearInterval(subtitleInterval);
-      if (/iPad|iPhone|iPod/.test(navigator.userAgent) && isAudiPlaying) {
+      if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
         tap.style.backgroundColor = "transparent";
         tap.style.display = "none";
       }
@@ -602,39 +589,19 @@ AFRAME.registerComponent("play-audio", {
 //   document.removeEventListener("click", unlockAudio);
 // };
 
-// tap.addEventListener("click", () => {
-//   if (/iPad|iPhone|iPod/.test(navigator.userAgent) && isAudiPlaying) {
-//     tap.style.backgroundColor = "transparent";
-//     tap.style.display = "none";
-//   }
-//   if (testSong) {
-//     testSong.play();
-
-//     subtitleInterval = setInterval(() => {
-//       showSubtitle(testSong.currentTime);
-//     }, 300);
-//   }
-// });
-
 tap.addEventListener("click", () => {
   if (testSong) {
-    testSong
-      .play()
-      .then(() => {
-        // Audio successfully started
-        if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-          tap.style.backgroundColor = "transparent";
-          tap.style.display = "none";
-        }
+    testSong.play().then(() => {
+      if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+        tap.style.backgroundColor = "transparent";
+        tap.style.display = "none";
+      }
+    });
+    console.log("kottikottikotti", testSong.currentTime);
 
-        console.log("kotti", testSong.currentTime);
-        subtitleInterval = setInterval(() => {
-          showSubtitle(testSong.currentTime);
-        }, 300);
-      })
-      .catch((err) => {
-        console.error("Audio play failed on tap:", err);
-      });
+    subtitleInterval = setInterval(() => {
+      showSubtitle(testSong.currentTime);
+    }, 300);
   }
 });
 
