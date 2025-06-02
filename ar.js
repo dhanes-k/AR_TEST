@@ -611,10 +611,10 @@ tap.addEventListener("click", () => {
 // document.addEventListener("touchstart", unlockAudio, { once: true });
 // document.addEventListener("click", unlockAudio, { once: true });
 
-function handleOrientation(event) {
-  const alpha = event.alpha;
-  const beta = event.beta;
-  const gamma = event.gamma;
-}
+// function handleOrientation(event) {
+//   const alpha = event.alpha;
+//   const beta = event.beta;
+//   const gamma = event.gamma;
+// }
 
-window.addEventListener("deviceorientation", handleOrientation, true);
+// window.addEventListener("deviceorientation", handleOrientation, true);
