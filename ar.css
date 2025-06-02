@@ -118,7 +118,7 @@ h6 {
   /* border: 2px solid var(--white); */
   border-radius: 14px;
   overflow: hidden;
-  z-index: 998;
+  z-index: 9999;
   display: none;
 }
 

@@ -182,6 +182,14 @@ const circle = document.querySelectorAll(".circle_status");
 loadQuestion();
 
 const openQuiz = () => {
+  isDialogOpen = true;
+
+  if (testSong) {
+    testSong.pause();
+    testSong.currentTime = 0;
+    clearInterval(subtitleInterval);
+  }
+
   let videoElement = document.getElementById("dialogVideo");
   videoElement.currentTime = 0;
   videoElement.pause();
