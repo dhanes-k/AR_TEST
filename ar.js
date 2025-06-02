@@ -526,21 +526,24 @@ AFRAME.registerComponent("play-audio", {
       addSubtitles(event.target.attributes["sub"].value);
       console.log("Target Found! Playing audio...");
       if (!isDialogOpen) {
-        sound.play().then(() => {
-          if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-            console.log("dhanesdhanesdhanes", sound.currentTime);
-            tap.style.display = "none";
-            tap.style.backgroundColor = "transparent";
-          }
-          subtitleInterval = setInterval(() => {
-            showSubtitle(sound.currentTime);
-          }, 300);
-        }).catch((e) => { 
-          if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-            tap.style.display = "flex";
-            tap.style.backgroundColor = "#4d4d4dbb";
-          }
-        });
+        sound
+          .play()
+          .then(() => {
+            if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+              console.log("dhanesdhanesdhanes", sound.currentTime);
+              tap.style.display = "none";
+              tap.style.backgroundColor = "transparent";
+            }
+            subtitleInterval = setInterval(() => {
+              showSubtitle(sound.currentTime);
+            }, 300);
+          })
+          .catch((e) => {
+            if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+              tap.style.display = "flex";
+              tap.style.backgroundColor = "#4d4d4dbb";
+            }
+          });
         // sound.addEventListener("playing", () => {
         // isAudiPlaying = true;
         // });
@@ -608,18 +611,10 @@ tap.addEventListener("click", () => {
 // document.addEventListener("touchstart", unlockAudio, { once: true });
 // document.addEventListener("click", unlockAudio, { once: true });
 
+function handleOrientation(event) {
+  const alpha = event.alpha;
+  const beta = event.beta;
+  const gamma = event.gamma;
+}
 
-const handleOrientationChange = () => {
-  const orientation = screen.orientation.type;
-  if (orientation.startsWith("portrait")) {
-    alert("Portrait mode");
-    // Perform actions for portrait mode
-  } else if (orientation.startsWith("landscape")) {
-    alert("Landscape mode");
-    // Perform actions for landscape mode
-  }
-};
-
-screen.orientation.addEventListener("change", handleOrientationChange);
-
-handleOrientationChange();
+window.addEventListener("deviceorientation", handleOrientation, true);
