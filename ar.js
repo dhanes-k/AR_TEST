@@ -631,14 +631,24 @@ tap.addEventListener("click", () => {
 function handleOrientation(event) {
   const subtitleContainer = document.getElementById("subtitle-container");
   const gamma = event.gamma;
-  if (gamma <= -70) {
-    subtitleContainer.style.transform = 'rotate(90deg)';
-  } else if (Math.abs(gamma) < 10) { // Adjust for near 0°
-    subtitleContainer.style.transform = 'rotate(0deg)';
-  } else if (gamma >= 70) {
-    subtitleContainer.style.transform = 'rotate(-90deg)';
-  }
-}
 
+  // Make the element visible
+  subtitleContainer.style.display = 'flex';
+
+  // Detect orientation class and get correct base transform
+  const isPortrait = subtitleContainer.classList.contains('portrait');
+  const baseTransform = isPortrait ? 'translateX(-50%)' : 'translateY(-50%)';
+
+  // Decide rotation based on gamma
+  let rotate = 'rotate(0deg)';
+  if (gamma <= -70) {
+    rotate = 'rotate(90deg)';
+  } else if (gamma >= 70) {
+    rotate = 'rotate(-90deg)';
+  }
+
+  // Combine base position + rotation
+  subtitleContainer.style.transform = `${baseTransform} ${rotate}`;
+}
 
 window.addEventListener("deviceorientation", handleOrientation, true);
