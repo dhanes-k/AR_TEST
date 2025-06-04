@@ -626,3 +626,18 @@ tap.addEventListener("click", () => {
 // }
 
 // window.addEventListener("deviceorientation", handleOrientation, true);
+
+
+function handleOrientation(event) {
+  const alpha = event.alpha;
+  const beta = event.beta;
+  const gamma = event.gamma;
+  console.log('gamma',gamma)
+  if (gamma <= -80){
+    alert('LEFT')
+  }else if(gamma < 80){
+    alert('RIGHT')
+  }
+}
+
+window.addEventListener("deviceorientation", handleOrientation, true);
