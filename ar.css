@@ -668,7 +668,7 @@ body {
 
 .landscape {
   position: absolute;
-  left: 0px;
+  bottom: 20px;
   top: 50%;
   transform: translateY(-50%) rotate(0deg);
   max-height: 90%;
