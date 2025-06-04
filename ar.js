@@ -629,14 +629,13 @@ tap.addEventListener("click", () => {
 
 
 function handleOrientation(event) {
-  const alpha = event.alpha;
-  const beta = event.beta;
+  const subtitleContainer = document.getElementById("subtitle-container");
   const gamma = event.gamma;
   console.log('gamma', gamma)
-  if (gamma <= -80) {
-    alert('LEFT');
-  } else if (gamma >= 80) {
-    alert('RIGHT');
+  if (gamma <= -70) {
+    subtitleContainer.style.rotate = '-90deg';
+  }else{
+    subtitleContainer.style.rotate = '0deg';
   }
 
 }
