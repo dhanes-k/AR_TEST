@@ -631,13 +631,14 @@ tap.addEventListener("click", () => {
 function handleOrientation(event) {
   const subtitleContainer = document.getElementById("subtitle-container");
   const gamma = event.gamma;
-  console.log('gamma', gamma)
   if (gamma <= -70) {
-    subtitleContainer.style.rotate = '-90deg';
-  }else{
-    subtitleContainer.style.rotate = '0deg';
+    subtitleContainer.style.transform = 'rotate(90deg)';
+  } else if (Math.abs(gamma) < 10) { // Adjust for near 0°
+    subtitleContainer.style.transform = 'rotate(0deg)';
+  } else if (gamma >= 70) {
+    subtitleContainer.style.transform = 'rotate(-90deg)';
   }
-
 }
+
 
 window.addEventListener("deviceorientation", handleOrientation, true);
