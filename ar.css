@@ -668,8 +668,8 @@ body {
 
 .landscape {
   position: absolute;
-  right: 20px;
-  top: 50%;
+  right: 10px;
+  top: 10%;
   transform: translateY(-50%) rotate(0deg);
   max-height: 90%;
   display: flex;
