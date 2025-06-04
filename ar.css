@@ -644,12 +644,11 @@ body {
   }
 }
 
-#portrait {
+.portrait {
   max-width: 90%;
   position: absolute;
   bottom: 20px;
   left: 50%;
-  transform: translateX(-50%);
   z-index: 999;
   display: flex;
   padding: 10px;
@@ -657,12 +656,11 @@ body {
   background-color: #000000;
 }
 
-#landscape {
+.landscape {
   max-height: 90%;
   position: absolute;
   right: 20px;
   top: 50%;
-  transform: translateY(-50%);
   z-index: 999;
   display: flex;
   flex-direction: column;
@@ -671,3 +669,4 @@ body {
   background-color: #000000;
   border-radius: 10px;
 }
+
