@@ -32,18 +32,6 @@
   </head>
 
   <style>
-    #subtitle-container {
-      max-width: 90%;
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 999;
-      display: flex;
-      padding: 10px;
-      gap: 20px;
-      background-color: #000000;
-    }
 
     /* Button Styles */
     .scan-buttons {
@@ -304,7 +292,7 @@
       </div>
     </div>
 
-    <div id="subtitle-container" style="display: none;rotate: 0deg;"></div>
+    <div id="subtitle-container" class="portrait" style="display: none;rotate: 0deg; transition: transform 0.3s ease;"></div>
 
     <div id="dialogBox" class="dialog-box">
       <div
