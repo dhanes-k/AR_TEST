@@ -628,32 +628,68 @@ tap.addEventListener("click", () => {
 // window.addEventListener("deviceorientation", handleOrientation, true);
 
 
+// function handleOrientation(event) {
+//   const subtitleContainer = document.getElementById("subtitle-container");
+//   const gamma = event.gamma;
+
+//   // Show the container
+//   subtitleContainer.style.display = 'flex';
+
+//   let rotateDeg = 0;
+//   if (gamma <= -70) {
+//     rotateDeg = 90;
+//   } else if (gamma >= 70) {
+//     rotateDeg = -90;
+//   } else {
+//     rotateDeg = 0;
+//   }
+//   subtitleContainer.style.transition = 'transform 1.2s ease-in-out';
+//   // Switch between portrait and landscape
+//   if (Math.abs(gamma) < 45) {
+//     subtitleContainer.classList.add('portrait');
+//     subtitleContainer.classList.remove('landscape');
+//     subtitleContainer.style.transform = `translateX(-50%) rotate(${rotateDeg}deg)`;
+//   } else {
+//     subtitleContainer.classList.add('landscape');
+//     subtitleContainer.classList.remove('portrait');
+//     subtitleContainer.style.transform = `translateX(-50%) rotate(${rotateDeg}deg)`;
+//   }
+// }
+
 function handleOrientation(event) {
   const subtitleContainer = document.getElementById("subtitle-container");
   const gamma = event.gamma;
 
-  // Show the container
   subtitleContainer.style.display = 'flex';
 
   let rotateDeg = 0;
+
   if (gamma <= -70) {
+    // Landscape left
     rotateDeg = 90;
-  } else if (gamma >= 70) {
-    rotateDeg = -90;
-  } else {
-    rotateDeg = 0;
-  }
-  subtitleContainer.style.transition = 'transform 1.2s ease-in-out';
-  // Switch between portrait and landscape
-  if (Math.abs(gamma) < 45) {
-    subtitleContainer.classList.add('portrait');
-    subtitleContainer.classList.remove('landscape');
-    subtitleContainer.style.transform = `translateX(-50%) rotate(${rotateDeg}deg)`;
-  } else {
     subtitleContainer.classList.add('landscape');
     subtitleContainer.classList.remove('portrait');
-    subtitleContainer.style.transform = `translateX(-50%) rotate(${rotateDeg}deg)`;
+    subtitleContainer.style.top = 'auto';
+    subtitleContainer.style.bottom = '20px';
+  } else if (gamma >= 70) {
+    // Landscape right
+    rotateDeg = -90;
+    subtitleContainer.classList.add('landscape');
+    subtitleContainer.classList.remove('portrait');
+    subtitleContainer.style.top = 'auto';
+    subtitleContainer.style.bottom = '20px';
+  } else {
+    // Portrait
+    rotateDeg = 0;
+    subtitleContainer.classList.add('portrait');
+    subtitleContainer.classList.remove('landscape');
+    subtitleContainer.style.top = 'auto';
+    subtitleContainer.style.bottom = '20px';
   }
+
+  subtitleContainer.style.transition = 'transform 1.2s ease-in-out';
+  subtitleContainer.style.transform = `translateX(-50%) rotate(${rotateDeg}deg)`;
 }
+
 
 window.addEventListener("deviceorientation", handleOrientation, true);
