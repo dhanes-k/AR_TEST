@@ -664,12 +664,12 @@ function handleOrientation(event) {
     // Landscape Right (device tilted left)
     subtitleContainer.classList.add('landscape');
     subtitleContainer.classList.remove('portrait');
-    subtitleContainer.style.transform = `translateX(50%) rotate(-90deg)`;
+    subtitleContainer.style.transform = `translateX(40%) rotate(-90deg)`;
   } else if (gamma <= -45) {
     // Landscape Left (device tilted right)
     subtitleContainer.classList.add('landscape');
     subtitleContainer.classList.remove('portrait');
-    subtitleContainer.style.transform = `translateX(-50%) rotate(90deg)`;
+    subtitleContainer.style.transform = `translateX(-40%) rotate(90deg)`;
   }
 
 }
