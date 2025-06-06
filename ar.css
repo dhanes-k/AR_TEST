@@ -645,17 +645,17 @@ body {
 }
 
 
-#subtitle-container {
+/* #subtitle-container {
   display: none;
   color: white;
   background-color: #000;
   padding: 20px;
   border-radius: 10px;
   transition: transform 0.3s ease;
-}
+} */
 
 
-.portrait {
+/* .portrait {
   position: absolute;
   bottom: 20px;
   left: 50%;
@@ -664,7 +664,7 @@ body {
   display: flex;
   gap: 20px;
   z-index: 999;
-}
+} */
 
 /* .landscape {
   position: absolute;
@@ -678,12 +678,46 @@ body {
   z-index: 999;
 } */
 
-.landscape {
+/* .landscape {
   position: absolute;
   bottom: 20px;
   max-width: 90%;
   display: flex;
   flex-direction: row;
+  gap: 20px;
+  z-index: 999;
+} */
+
+
+#subtitle-container {
+  display: none;
+  color: white;
+  background-color: #000;
+  padding: 20px;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+ 
+ 
+.portrait {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) rotate(0deg);
+  max-width: 90%;
+  display: flex;
+  gap: 20px;
+  z-index: 999;
+}
+ 
+.landscape {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%) rotate(0deg);
+  max-height: 90%;
+  display: flex;
+  flex-direction: column;
   gap: 20px;
   z-index: 999;
 }
