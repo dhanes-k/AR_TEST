@@ -645,15 +645,33 @@ function handleOrientation(event) {
   }
   subtitleContainer.style.transition = 'transform 1.2s ease-in-out';
   // Switch between portrait and landscape
-  if (Math.abs(gamma) < 45) {
+  // if (Math.abs(gamma) < 45) {
+  //   subtitleContainer.classList.add('portrait');
+  //   subtitleContainer.classList.remove('landscape');
+  //   subtitleContainer.style.transform = `translateX(-50%) rotate(${rotateDeg}deg)`;
+  // } else {
+  //   subtitleContainer.classList.add('landscape');
+  //   subtitleContainer.classList.remove('portrait');
+  //   subtitleContainer.style.transform = `translateX(-50%) rotate(${rotateDeg}deg)`;
+  // }
+
+  if (gamma > -45 && gamma < 45) {
+    // Portrait
     subtitleContainer.classList.add('portrait');
     subtitleContainer.classList.remove('landscape');
-    subtitleContainer.style.transform = `translateX(-50%) rotate(${rotateDeg}deg)`;
-  } else {
+    subtitleContainer.style.transform = `translateX(-50%) rotate(0deg)`;
+  } else if (gamma >= 45) {
+    // Landscape Right (device tilted left)
     subtitleContainer.classList.add('landscape');
     subtitleContainer.classList.remove('portrait');
-    subtitleContainer.style.transform = `translateX(-50%) rotate(${rotateDeg}deg)`;
+    subtitleContainer.style.transform = `translateX(50%) rotate(-90deg)`;
+  } else if (gamma <= -45) {
+    // Landscape Left (device tilted right)
+    subtitleContainer.classList.add('landscape');
+    subtitleContainer.classList.remove('portrait');
+    subtitleContainer.style.transform = `translateX(-50%) rotate(90deg)`;
   }
+
 }
 
 window.addEventListener("deviceorientation", handleOrientation, true);
