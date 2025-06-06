@@ -643,7 +643,7 @@ function handleOrientation(event) {
   } else {
     rotateDeg = 0;
   }
-
+  subtitleContainer.style.transition = 'transform 1.2s ease-in-out';
   // Switch between portrait and landscape
   if (Math.abs(gamma) < 45) {
     subtitleContainer.classList.add('portrait');
