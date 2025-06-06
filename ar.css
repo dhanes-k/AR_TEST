@@ -692,8 +692,8 @@ body {
 #subtitle-container {
   display: none;
   color: white;
-  background-color: #000;
-  padding: 20px;
+  background-color: #696969;
+  padding: 14px;
   border-radius: 10px;
   transition: transform 0.3s ease;
 }
