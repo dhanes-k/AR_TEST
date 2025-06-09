@@ -532,7 +532,6 @@ AFRAME.registerComponent("play-audio", {
     entity.addEventListener("targetFound", (event) => {
       currentTargetImg = event;
       addSubtitles(event.target.attributes["sub"].value);
-      console.log("Target Found! Playing audio...");
       if (!isDialogOpen) {
         sound
           .play()
