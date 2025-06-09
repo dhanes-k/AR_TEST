@@ -3,11 +3,11 @@
     "id": 0,
     "seek": 0,
     "start": 0.0,
-    "end": 4.88,
-    "text": "Step into the soul of South India at Sangeetha Veg Restaurant.",
+    "end": 5.18,
+    "text": "Step into the soul of South India at Sangeetha Veg Restaurant",
     "tokens": [
       50364,
-      5470,
+      1823,
       666,
       264,
       5133,
@@ -17,25 +17,26 @@
       412,
       19037,
       2786,
-      9706,
-      73,
+      691,
+      1146,
+      311,
       6383,
       13,
-      50608
+      50623
     ],
     "temperature": 0.0,
-    "avg_logprob": -0.3046240862678079,
-    "compression_ratio": 1.509090909090909,
-    "no_speech_prob": 0.0070564765483140945
+    "avg_logprob": -0.29756190560080786,
+    "compression_ratio": 1.4933333333333334,
+    "no_speech_prob": 0.002965254709124565
   },
   {
     "id": 1,
     "seek": 0,
-    "start": 4.88,
-    "end": 11.24,
-    "text": " Our mural brings to life the charm of a traditional Agraharam—a serene village where",
+    "start": 5.18,
+    "end": 11.96,
+    "text": "Our mural brings to life the charm of a traditional Agraharam a serene village where every pathway",
     "tokens": [
-      50608,
+      50623,
       2621,
       40595,
       5607,
@@ -56,23 +57,23 @@
       1450,
       7288,
       689,
-      50926
+      633,
+      18590,
+      50962
     ],
     "temperature": 0.0,
-    "avg_logprob": -0.3046240862678079,
-    "compression_ratio": 1.509090909090909,
-    "no_speech_prob": 0.0070564765483140945
+    "avg_logprob": -0.29756190560080786,
+    "compression_ratio": 1.4933333333333334,
+    "no_speech_prob": 0.002965254709124565
   },
   {
     "id": 2,
     "seek": 0,
-    "start": 11.24,
-    "end": 17.48,
-    "text": " every pathway is steeped in culture and every rooftop holds a story.",
+    "start": 11.96,
+    "end": 16.740000000000002,
+    "text": "is stepped in culture and every rooftop holds a story.",
     "tokens": [
-      50926,
-      633,
-      18590,
+      50962,
       307,
       16841,
       292,
@@ -85,30 +86,31 @@
       257,
       1657,
       13,
-      51238
+      51201
     ],
     "temperature": 0.0,
-    "avg_logprob": -0.3046240862678079,
-    "compression_ratio": 1.509090909090909,
-    "no_speech_prob": 0.0070564765483140945
+    "avg_logprob": -0.29756190560080786,
+    "compression_ratio": 1.4933333333333334,
+    "no_speech_prob": 0.002965254709124565
   },
   {
     "id": 3,
     "seek": 0,
-    "start": 17.48,
-    "end": 25.0,
-    "text": " At its heart, a towering temple gopuram rises with grace and devotion, symbolizing the spiritual",
+    "start": 16.740000000000002,
+    "end": 22.72,
+    "text": "At its heart, a towering temple gopuram rises with grace and devotion, symbolizing the",
     "tokens": [
-      51238,
+      51201,
       1711,
       1080,
       1917,
+      11,
       257,
       10567,
       278,
       10184,
-      290,
-      404,
+      352,
+      79,
       374,
       335,
       21373,
@@ -116,47 +118,48 @@
       10042,
       293,
       30671,
+      11,
       5986,
       3319,
       264,
-      6960,
-      51614
+      51500
     ],
     "temperature": 0.0,
-    "avg_logprob": -0.3046240862678079,
-    "compression_ratio": 1.509090909090909,
-    "no_speech_prob": 0.0070564765483140945
+    "avg_logprob": -0.29756190560080786,
+    "compression_ratio": 1.4933333333333334,
+    "no_speech_prob": 0.002965254709124565
   },
   {
     "id": 4,
     "seek": 0,
-    "start": 25.0,
-    "end": 27.12,
-    "text": " rhythm of daily life.",
+    "start": 22.72,
+    "end": 25.88,
+    "text": "spiritual rhythm of daily life.",
     "tokens": [
-      51614,
+      51500,
+      6960,
       11801,
       295,
       5212,
       993,
       13,
-      51720
+      51658
     ],
     "temperature": 0.0,
-    "avg_logprob": -0.3046240862678079,
-    "compression_ratio": 1.509090909090909,
-    "no_speech_prob": 0.0070564765483140945
+    "avg_logprob": -0.29756190560080786,
+    "compression_ratio": 1.4933333333333334,
+    "no_speech_prob": 0.002965254709124565
   },
   {
     "id": 5,
-    "seek": 2712,
-    "start": 27.12,
-    "end": 33.44,
-    "text": " Surrounded by gently swaying banana trees and heritage-filled homes, this artwork invites",
+    "seek": 2588,
+    "start": 25.88,
+    "end": 32.08,
+    "text": "Surrounded by gently swaying banana trees and heritage filled homes, this artwork invites",
     "tokens": [
       50364,
-      6732,
-      50167,
+      8207,
+      292,
       538,
       13073,
       27555,
@@ -171,21 +174,21 @@
       341,
       15829,
       35719,
-      50680
+      50674
     ],
     "temperature": 0.0,
-    "avg_logprob": -0.2405779626634386,
-    "compression_ratio": 1.4880382775119618,
-    "no_speech_prob": 0.05337752401828766
+    "avg_logprob": -0.24207305908203125,
+    "compression_ratio": 1.4895833333333333,
+    "no_speech_prob": 0.12815360724925995
   },
   {
     "id": 6,
-    "seek": 2712,
-    "start": 33.44,
-    "end": 40.68,
-    "text": " you to pause, reflect, and reconnect with a more mindful, meaningful way of living.",
+    "seek": 2588,
+    "start": 32.08,
+    "end": 38.92,
+    "text": "you to pause, reflect, and reconnect with a more mindful, meaningful way of living.",
     "tokens": [
-      50680,
+      50674,
       291,
       281,
       10465,
@@ -203,50 +206,30 @@
       295,
       2647,
       13,
-      51042
+      51016
     ],
     "temperature": 0.0,
-    "avg_logprob": -0.2405779626634386,
-    "compression_ratio": 1.4880382775119618,
-    "no_speech_prob": 0.05337752401828766
+    "avg_logprob": -0.24207305908203125,
+    "compression_ratio": 1.4895833333333333,
+    "no_speech_prob": 0.12815360724925995
   },
   {
     "id": 7,
-    "seek": 2712,
-    "start": 40.68,
-    "end": 44.56,
-    "text": " More than just décor, it’s a tribute to our roots",
+    "seek": 2588,
+    "start": 38.92,
+    "end": 45.16,
+    "text": "it's a tribute to our roots a vibrant glimpse into the traditions that inspire our food",
     "tokens": [
-      51042,
-      5048,
-      813,
-      445,
-      7919,
-      11,
-      309,
+      51016,
+      467,
       311,
       257,
       24722,
       281,
       527,
       10669,
-      13,
-      51236
-    ],
-    "temperature": 0.0,
-    "avg_logprob": -0.2405779626634386,
-    "compression_ratio": 1.4880382775119618,
-    "no_speech_prob": 0.05337752401828766
-  },
-  {
-    "id": 8,
-    "seek": 2712,
-    "start": 44.56,
-    "end": 51.8,
-    "text": "a vibrant glimpse into the traditions that inspire our food, our values, and our warmth.",
-    "tokens": [
-      51236,
-      316,
+      11,
+      257,
       21571,
       25838,
       666,
@@ -257,17 +240,33 @@
       527,
       1755,
       11,
+      51328
+    ],
+    "temperature": 0.0,
+    "avg_logprob": -0.24207305908203125,
+    "compression_ratio": 1.4895833333333333,
+    "no_speech_prob": 0.12815360724925995
+  },
+  {
+    "id": 8,
+    "seek": 2588,
+    "start": 45.16,
+    "end": 47.16,
+    "text": "our values, and our warmth.",
+    "tokens": [
+      51328,
       527,
       4190,
       293,
       527,
       24737,
       13,
-      51598
+      51428
     ],
     "temperature": 0.0,
-    "avg_logprob": -0.2405779626634386,
-    "compression_ratio": 1.4880382775119618,
-    "no_speech_prob": 0.05337752401828766
+    "avg_logprob": -0.24207305908203125,
+    "compression_ratio": 1.4895833333333333,
+    "no_speech_prob": 0.12815360724925995
   }
 ]
+ 
