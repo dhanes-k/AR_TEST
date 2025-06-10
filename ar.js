@@ -632,7 +632,7 @@ function handleOrientation(event) {
   const gamma = event.gamma;
 
   // Show the container
-  subtitleContainer.style.display = 'flex';
+  // subtitleContainer.style.display = 'flex';
 
   let rotateDeg = 0;
   if (gamma <= -70) {
@@ -642,6 +642,7 @@ function handleOrientation(event) {
   } else {
     rotateDeg = 0;
   }
+  
   subtitleContainer.style.transition = 'transform 1.2s ease-in-out';
   // Switch between portrait and landscape
   // if (Math.abs(gamma) < 45) {
