@@ -132,9 +132,13 @@ const closeModal = (event) => {
   isDialogOpen = false;
   if (testSong) {
     testSong.play();
-    subtitleInterval = setInterval(() => {
-      showSubtitle(testSong.currentTime);
-    }, 300);
+
+    if (!/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+      subtitleInterval = setInterval(() => {
+        showSubtitle(testSong.currentTime);
+      }, 300);
+    }
+
   }
   let videoElement = document.getElementById("dialogVideo");
   switch (event) {
@@ -541,9 +545,12 @@ AFRAME.registerComponent("play-audio", {
               tap.style.display = "none";
               tap.style.backgroundColor = "transparent";
             }
-            subtitleInterval = setInterval(() => {
-              showSubtitle(sound.currentTime);
-            }, 300);
+            if (!/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+              subtitleInterval = setInterval(() => {
+                showSubtitle(sound.currentTime);
+              }, 300);
+            }
+
           })
           .catch((e) => {
             if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
@@ -609,9 +616,11 @@ tap.addEventListener("click", () => {
     });
     console.log("kottikottikotti", testSong.currentTime);
 
-    subtitleInterval = setInterval(() => {
-      showSubtitle(testSong.currentTime);
-    }, 300);
+    if (!/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+      subtitleInterval = setInterval(() => {
+        showSubtitle(sound.currentTime);
+      }, 300);
+    }
   }
 });
 
@@ -642,7 +651,7 @@ function handleOrientation(event) {
   } else {
     rotateDeg = 0;
   }
-  
+
   subtitleContainer.style.transition = 'transform 1.2s ease-in-out';
   // Switch between portrait and landscape
   // if (Math.abs(gamma) < 45) {
