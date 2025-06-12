@@ -588,10 +588,17 @@ body {
 /* Responsive Dialog Box */
 .dialog-box {
   display: none;
-  position: fixed;
-  top: 50%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* vertically center */
+  position: absolute;
+  left: 1;
+  right: 1;
+  top: 1;
+  bottom: 1;
+  /* top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); */
   width: 860px;
   height: auto;
   background-color: rgba(247, 247, 247, 0.507);
