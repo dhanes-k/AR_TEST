@@ -437,15 +437,6 @@ targets.forEach(({ targetId, imageId, character }) => {
     }, 200);
   });
 
-  sound.onended = () => {
-    clearInterval(subtitleInterval);
-    const subtitleContainer = document.getElementById("subtitle-container");
-    subtitleContainer.innerText = "";
-    subtitleContainer.style.display = "none";
-  };
-
-
-
   target.addEventListener("targetLost", () => {
     console.log("Cleaning up animation due to lost target.");
     clearInterval(animationInterval);
@@ -573,6 +564,15 @@ AFRAME.registerComponent("play-audio", {
         testSong = sound;
       }
     });
+
+    sound.onended = () => {
+      clearInterval(subtitleInterval);
+      const subtitleContainer = document.getElementById("subtitle-container");
+      subtitleContainer.innerText = "";
+      subtitleContainer.style.display = "none";
+    };
+
+
 
     entity.addEventListener("targetLost", () => {
       console.log("Target Lost! Stopping audio...");
